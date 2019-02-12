@@ -16,7 +16,16 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'plan_id', 
+        'name', 
+        'email', 
+        'password',
+        'cpf',
+        'cep',
+        'address',
+        'complement',
+        'number',
+        'district',
     ];
 
     /**
@@ -27,4 +36,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function plan()
+    {
+        return $this->belongsTo(Plan::class);
+    }
+
+    public function user_phone()
+    {
+        return $this->belongsToMany(Phone::class, 'user_phone', 'phone_id', 'user_id')->withTimestamps();
+    }
 }

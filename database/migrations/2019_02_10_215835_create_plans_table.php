@@ -17,6 +17,7 @@ class CreatePlansTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->float('amount', 8, 2);
+             $table->text('description')->nullable();
             $table->timestamps();
         });
     }
