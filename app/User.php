@@ -26,6 +26,8 @@ class User extends Authenticatable
         'complement',
         'number',
         'district',
+        'uf',
+        'city',
     ];
 
     /**

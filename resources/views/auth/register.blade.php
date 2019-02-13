@@ -28,7 +28,7 @@
         
     <div class="col-md-10">
         <h1 class="display-4 text-center">Cadastro</h1>
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="{{ route('register') }}" id="frm-register">
             @csrf
 
             <div class="form-group row">
@@ -127,7 +127,7 @@
                 <label for="complement" class="col-md-4 col-form-label text-md-right">{{ __('Complemento') }}</label>
 
                 <div class="col-md-6">
-                    <input id="complement" type="text" class="form-control{{ $errors->has('complement') ? ' is-invalid' : '' }}" name="complement" value="{{ old('complement') }}" required>
+                    <input id="complement" type="text" class="form-control{{ $errors->has('complement') ? ' is-invalid' : '' }}" name="complement" value="{{ old('complement') }}">
 
                     @if ($errors->has('complement'))
                         <span class="invalid-feedback" role="alert">
@@ -155,7 +155,7 @@
                 <label for="district" class="col-md-4 col-form-label text-md-right">{{ __('Bairro') }}</label>
 
                 <div class="col-md-6">
-                    <input id="district" type="text" class="form-control{{ $errors->has('district') ? ' is-invalid' : '' }}" name="cep" value="{{ old('district') }}" required>
+                    <input id="district" type="text" class="form-control{{ $errors->has('district') ? ' is-invalid' : '' }}" name="district" value="{{ old('district') }}" required>
 
                     @if ($errors->has('district'))
                         <span class="invalid-feedback" role="alert">
@@ -165,10 +165,40 @@
                 </div>
             </div>
 
+            <div class="form-group row">
+                <label for="uf" class="col-md-4 col-form-label text-md-right">{{ __('Estado') }}</label>
+
+                <div class="col-md-6">
+                    <select name="uf" class="form-control{{ $errors->has('uf') ? ' is-invalid' : '' }}" required>
+                        <option value="">Selecione</option>
+                    </select>
+
+                    @if ($errors->has('uf'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('uf') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="city" class="col-md-4 col-form-label text-md-right">{{ __('Cidade') }}</label>
+
+                <div class="col-md-6">
+                    <input id="city" type="text" class="form-control{{ $errors->has('city') ? ' is-invalid' : '' }}" name="city" value="{{ old('city') }}" required>
+
+                    @if ($errors->has('city'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('city') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+
             <div class="form-group row mb-0">
                 <div class="col-md-6 offset-md-4">
-                    <button type="submit" class="btn btn-primary">
-                        {{ __('Register') }}
+                    <button type="submit" class="btn btn-primary" id="btnSaveRegister">
+                        {{ __('Continuar') }}
                     </button>
                 </div>
             </div>
@@ -177,3 +207,7 @@
 
 @endsection
 
+@section('scripts')    
+    <script src="{{ env('APP_URL') }}js/bundle.min.js?_={{ env('APP_TIMECACHE') }}"></script>
+    <script src="{{ env('APP_URL') }}js/actions/register.js?_={{ env('APP_TIMECACHE') }}"></script>
+@endsection

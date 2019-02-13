@@ -25,6 +25,8 @@ class CreateUsersTable extends Migration
             $table->string('complement')->nullable();
             $table->string('number',6)->nullable();
             $table->string('district')->nullable();
+            $table->char('uf',2)->nullable();
+            $table->string('city')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
