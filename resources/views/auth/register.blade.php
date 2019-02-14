@@ -169,8 +169,35 @@
                 <label for="uf" class="col-md-4 col-form-label text-md-right">{{ __('Estado') }}</label>
 
                 <div class="col-md-6">
-                    <select name="uf" class="form-control{{ $errors->has('uf') ? ' is-invalid' : '' }}" required>
-                        <option value="">Selecione</option>
+                    <select name="uf" id="uf" class="form-control{{ $errors->has('uf') ? ' is-invalid' : '' }}" required>
+                        <option value="" selected="selected">Selecione</option>
+                        <option value="AC">Acre</option>
+                        <option value="AL">Alagoas</option>
+                        <option value="AM">Amazonas</option>
+                        <option value="AP">Amapá</option>
+                        <option value="BA">Bahia</option>
+                        <option value="CE">Ceará</option>
+                        <option value="DF">Distrito Federal</option>
+                        <option value="GO">Espírito Santo</option>
+                        <option value="9">Goiás</option>
+                        <option value="MA">Maranhão</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="MS">Mato Grosso do Sul</option>
+                        <option value="MT">Mato Grosso</option>
+                        <option value="PA">Pará</option>
+                        <option value="PB">Paraíba</option>
+                        <option value="PE">Pernambuco</option>
+                        <option value="PI">Piauí</option>
+                        <option value="PR">Paraná</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="RN">Rio Grande do Norte</option>
+                        <option value="RO">Rondônia</option>
+                        <option value="RR">Roraima</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="SE">Sergipe</option>
+                        <option value="SP">São Paulo</option>
+                        <option value="TO">Tocantins</option>
                     </select>
 
                     @if ($errors->has('uf'))
@@ -194,6 +221,25 @@
                     @endif
                 </div>
             </div>
+
+            <div class="form-group row">
+                <div class="col-md-6 offset-md-4">
+                    <button class="btn btn-success add-phone">
+                        {{ __('Adicionar Telefone') }}
+                    </button>
+                </div>
+            </div>           
+            
+            <div id="box">
+                <div class="form-group row ph-id" id="row-1">
+                    <label for="phone_1" class="col-md-4 col-form-label text-md-right lbph">{{ __('Telefone') }}</label>
+                    
+                    <div class="col-md-6">
+                        <input id="phone_1" type="text" class="form-control ph" name="phone_1" data-number="1" value="{{ old('phone') }}" >
+                    </div>
+                </div>
+            </div>
+            
 
             <div class="form-group row mb-0">
                 <div class="col-md-6 offset-md-4">

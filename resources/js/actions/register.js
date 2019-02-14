@@ -69,6 +69,24 @@ $(document).ready(function () {
             });
         });
 
+        $(".add-phone").on("click", function () {
+            var id = $('.ph-id').length;
+
+            if (id < 3) {
+                var div = $('#row-' + id);
+                var count = id + 1;
+                div.clone()
+                        .appendTo('#box')
+                        .attr('id', 'row-' + count);
+                var element = $('#row-' + count);
+                element.find(".ph").attr('id', 'phone_' + count).attr('name', 'phone_' + count).data('number', count);
+                element.find(".lbph").attr('for', 'phone_' + count);
+                //element.find(".rm-dep-lev").val(count);
+            }
+            return false;
+        });
+
+
         $("#cep").on("focusout", function () {
             var cep = $(this).val();
             cep = cep.replace('-', '');
@@ -80,6 +98,9 @@ $(document).ready(function () {
                 success: function (resp) {
                     $('#address').val(resp.logradouro);
                     $('#district').val(resp.bairro);
+                    $('#city').val(resp.localidade);
+                    $('#uf option[value='+resp.uf+']').attr('selected','selected');
+                    $('#number').focus();
                 }
             });
         });

@@ -52,6 +52,13 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'cpf' => ['required', 'string'],
+            'cep' => ['required', 'string'],
+            'address' => ['required', 'string'],
+            'number' => ['required', 'int'],
+            'district' => ['required', 'string'],
+            'uf' => ['required', 'string', 'max:2'],
+            'city' => ['required', 'string'],
         ]);
     }
 
@@ -63,10 +70,28 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        try{
+            $create = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'cpf' => $data['cpf'],
+                'password' => Hash::make($data['password']),
+                'cep' => $data['cep'],
+                'address' => $data['address'],
+                'complement' => $data['complement'],
+                'number' => $data['number'],
+                'district' => $data['district'],
+                'uf' => $data['uf'],
+                'city' => $data['city'],
+            ]);
+
+            if($create){
+                return response()->json(['ret' => 0, 'msg' => 'Cadastro realizado com sucesso!', 'url' => route('plans')],200);
+            } else {
+                return response()->json(['ret' => 0, 'msg' => 'Ops, ocorreu um erro no cadastro. Por favor tente mais tarde.'],500);
+            }
+        }catch (\Exception $e){
+            return response()->json(['ret' => 0, 'msg' => 'Ops, ocorreu um erro no cadastro. Por favor tente mais tarde.'],500);
+        }
     }
 }

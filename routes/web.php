@@ -14,6 +14,9 @@
 Route::get('/', function () {
     return view('index');
 });
+Route::get('/escolher-plano', function () {
+    return view('plan.index');
+})->name('plans');
 
 Auth::routes();
 
