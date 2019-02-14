@@ -1,7 +1,6 @@
 $(document).ready(function () {
+    var phones = [];
     if ($("#frm-register").length) {
-
-        console.log('entramos')
 
         $('#cpf').inputmask({ mask: '999.999.999-99' });
         $('#cep').inputmask({ mask: '99999-999' });
@@ -42,47 +41,67 @@ $(document).ready(function () {
                 submitHandler: function (form) {
                     var params = $("#frm-register").serialize();
                     var url = $("#frm-register").attr('action');
-                    $.ajax({
-                        type: 'POST',
-                        url: url,
-                        data: params,
-                        dataType: 'json',
-                        contentType: 'application/x-www-form-urlencoded',
-                        success: function (response) {
-                            if (response.ret == 1) {
-                                swal({
-                                    title: "Atenção!",
-                                    text: response.msg,
-                                    type: "success",
-                                    confirmButtonColor: '#3085d6',
-                                    cancelButtonColor: '#d33',
-                                    confirmButtonText: "Ok",
-                                }, function () {
-                                    console.log(response.url);
-                                    window.location = response.url;
-                                });
-                            } else {
-                                swal("Atenção", response.msg, "error");
+                    
+
+                    if ($('#password').val() == $('#password-confirm').val()){
+                        $('.ph').each(function (i) {
+                            var phone = $(this).attr('id');
+                            phones.push($('#' + phone).val());
+                        });
+
+                        $.ajax({
+                            type: 'POST',
+                            url: url,
+                            data: params + '&phones=' + JSON.stringify(phones),
+                            dataType: 'json',
+                            contentType: 'application/x-www-form-urlencoded',
+                            success: function (response) {
+                                console.log(response)
+                                if (response.ret == 1) {
+                                    swal({
+                                        title: "Atenção!",
+                                        text: response.msg,
+                                        type: "success",
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: "Ok",
+                                    }, function () {
+                                        //console.log(response.url);
+                                       // window.location = response.url;
+                                    });
+                                } else {
+                                    swal("Atenção", response.msg, "error");
+                                }
                             }
-                        }
-                    });
+                        });
+                    }else{
+                        swal("Atenção", "A senha não confere com a confirmação.", "error");
+                    }
+                    return false;
                 }
             });
         });
 
         $(document).on("click", ".add-phone", function () {
             var id = $('.ph-id').length;
+            
+            var div = $('#row-' + id);
+            var count = id + 1;
+            div.clone()
+                    .appendTo('#box')
+                    .attr('id', 'row-' + count);
+            var element = $('#row-' + count);
+            element.find(".ph").attr('id', 'phone_' + count).attr('name', 'phone_' + count).val('').data('number', count).inputmask({ mask: '(99) 9999[9]-9999', clearMaskOnLostFocus: true });
+            element.find(".lbph").attr('for', 'phone_' + count).text('Telefone ' + count);
+            element.find(".rm-ph").val(count);
+            
+            return false;
+        });
 
-            if (id < 3) {
-                var div = $('#row-' + id);
-                var count = id + 1;
-                div.clone(true, true)
-                        .appendTo('#box')
-                        .attr('id', 'row-' + count);
-                var element = $('#row-' + count);
-                element.find(".ph").attr('id', 'phone_' + count).attr('name', 'phone_' + count).data('number', count);
-                element.find(".lbph").attr('for', 'phone_' + count).text('Telefone ' + count);
-                //element.find(".rm-dep-lev").val(count);
+        $(document).on('click', '.rm-ph', function () {
+            var id = $(this).val();
+            if ($('.ph-id').length > 1) {
+                $('#row-' + id).remove();
             }
             return false;
         });

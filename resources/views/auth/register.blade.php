@@ -225,7 +225,7 @@
             <div class="form-group row">
                 <div class="col-md-6 offset-md-4">
                     <button class="btn btn-success add-phone">
-                        {{ __('Adicionar Telefone') }}
+                        {{ __('+ Telefones') }}
                     </button>
                 </div>
             </div>           
@@ -234,8 +234,11 @@
                 <div class="form-group row ph-id" id="row-1">
                     <label for="phone_1" class="col-md-4 col-form-label text-md-right lbph">{{ __('Telefone') }}</label>
                     
-                    <div class="col-md-6">
+                    <div class="col-md-6 input-group mb-3" >
                         <input id="phone_1" type="text" class="form-control ph" name="phone_1" data-number="1" value="{{ old('phone') }}" >
+                        <div class="input-group-append">
+                            <button class="btn btn-danger rm-ph" type="button" value="0">-</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -244,7 +247,7 @@
             <div class="form-group row mb-0">
                 <div class="col-md-6 offset-md-4">
                     <button type="submit" class="btn btn-primary" id="btnSaveRegister">
-                        {{ __('Continuar') }}
+                        {{ __('Salvar') }}
                     </button>
                 </div>
             </div>
