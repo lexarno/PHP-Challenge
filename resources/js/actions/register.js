@@ -5,6 +5,7 @@ $(document).ready(function () {
 
         $('#cpf').inputmask({ mask: '999.999.999-99' });
         $('#cep').inputmask({ mask: '99999-999' });
+        $('.ph').inputmask({ mask: '(99) 9999[9]-9999', clearMaskOnLostFocus: true });
 
         $("#btnSaveRegister").on("click", function () {
             $("#frm-register").validate({
@@ -69,18 +70,18 @@ $(document).ready(function () {
             });
         });
 
-        $(".add-phone").on("click", function () {
+        $(document).on("click", ".add-phone", function () {
             var id = $('.ph-id').length;
 
             if (id < 3) {
                 var div = $('#row-' + id);
                 var count = id + 1;
-                div.clone()
+                div.clone(true, true)
                         .appendTo('#box')
                         .attr('id', 'row-' + count);
                 var element = $('#row-' + count);
                 element.find(".ph").attr('id', 'phone_' + count).attr('name', 'phone_' + count).data('number', count);
-                element.find(".lbph").attr('for', 'phone_' + count);
+                element.find(".lbph").attr('for', 'phone_' + count).text('Telefone ' + count);
                 //element.find(".rm-dep-lev").val(count);
             }
             return false;
