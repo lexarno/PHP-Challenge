@@ -8,7 +8,7 @@
     @else
         <nav class="my-2 my-md-0 mr-md-3">
         @if (Route::has('register'))
-            <a class="p-2 text-dark" href="{{ route('register') }}">Cadastre-se</a>
+            <a class="p-2 text-dark" href="{{ route('user.index') }}">Cadastre-se</a>
         @endif
         </nav>
         <a class="btn btn-outline-primary" href="{{ route('login') }}">Login</a>

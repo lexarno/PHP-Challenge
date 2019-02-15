@@ -24,16 +24,16 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:2', 
-            'email' => 'required', 
-            'password' => 'required|min:6',
-            'cpf' => 'required',
-            'cep' => 'required',
-            'address' => 'required',
-            'number' => 'required',
-            'district' => 'required',
-            'uf' => 'required',
-            'city' => 'required',
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'cpf' => ['required', 'string'],
+            'cep' => ['required', 'string'],
+            'address' => ['required', 'string'],
+            'number' => ['required', 'int'],
+            'district' => ['required', 'string'],
+            'uf' => ['required', 'string', 'max:2'],
+            'city' => ['required', 'string'],
         ];
     }
 }

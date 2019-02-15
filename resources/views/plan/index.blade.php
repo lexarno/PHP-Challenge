@@ -39,7 +39,7 @@
         <p class="lead">CEP: {{ $user->cep }}</p>
     </div>
 
-    <form method="POST" action="{{ route('user.store') }}" id="frm-payment">
+    <form method="POST" action="{{ route('payments.checkout') }}" id="frm-payment">
         @csrf
 
         <div class="card-deck mb-3 text-center">
@@ -90,6 +90,7 @@
             </div>
         </div>
         <hr class="mb-4">
+        <input type="hidden" value="{{ $user->id }}" name="user_id" />
         <button class="btn btn-primary btn-lg btn-block" id="btnSavePayment" type="submit">Finalizar</button>
     </form>
 

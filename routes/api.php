@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['prefix' => 'payments', 'as' => 'payments.'], function () {
+    Route::get('/', ['as' => 'index', 'uses' => 'PaymentController@index']);
+    Route::post('/checkout', ['as' => 'checkout', 'uses' => 'PaymentController@checkout']);
 });

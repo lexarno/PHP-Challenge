@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 use Session;
 use App\User;
 use App\Plan;
@@ -12,15 +13,15 @@ class UserController extends Controller
 {
     public function index() 
     {
-        $user = Session::has('solicitation') ? Session::get('solicitation') : null;
-        if(!$user){
-            return redirect()->route('user.plans');
-        }else{
+        $user = Session::has('user_id') ? Session::get('user_id') : null;
+        if(empty($user)){
             return view('user.index');
+        }else{
+            return redirect()->route('user.plans');
         }
     }
 
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         $data = $request->all();
         try{
@@ -52,12 +53,22 @@ class UserController extends Controller
     public function plans()
     {
         $user_id = Session::has('user_id') ? Session::get('user_id') : null;
-        if(!$user_id){
+        if(empty($user_id)){
             return redirect()->route('user.index');
         }else{
             $plans = Plan::all();
             $user = User::find($user_id);
             return view('plan.index', compact('user','plans'));
         }
+    }
+
+    public function success()
+    {
+        return view('user.success');
+    }
+
+    public function error()
+    {
+
     }
 }

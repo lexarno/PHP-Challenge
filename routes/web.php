@@ -21,6 +21,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'cadastro', 'as' => 'user.'], function () {
     Route::get('/', ['as' => 'index', 'uses' => 'UserController@index']);
+    Route::get('/sucesso', ['as' => 'success', 'uses' => 'UserController@success']);
+    Route::get('/erro', ['as' => 'error', 'uses' => 'UserController@error']);
     Route::get('/escolher-plano', ['as' => 'plans', 'uses' => 'UserController@plans']);
     Route::post('/store', ['as' => 'store', 'uses' => 'UserController@store']);
 });

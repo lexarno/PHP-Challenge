@@ -3,6 +3,7 @@ $(document).ready(function () {
 
         $('#card_number').inputmask({ mask: '9999 9999 9999 9999' });
         $('#card_expiration').inputmask({ mask: '99/99' });
+        $('#card_cvv').inputmask({ mask: '999' });
 
         $("#btnSavePayment").on("click", function () {
             $("#frm-payment").validate({
@@ -44,7 +45,7 @@ $(document).ready(function () {
                             if (response.ret == 1) {
                                 $("#btnSavePayment").attr('disabled',false);
                                 Swal.enableLoading();
-                                
+                                window.location = response.url;
                             } else {
                                 $("#btnSavePayment").attr('disabled',false);
                                 Swal.enableLoading()

@@ -12,6 +12,13 @@ function cleanCPF($cpf)
     return str_replace("-", "", $cpf);
 }
 
+function cleanCard($card_number)
+{
+    $card_number = str_replace(" ", "", $card_number);
+    $card_number = str_replace(".", "", $card_number);
+    return str_replace("-", "", $card_number);
+}
+
 function convertToMoney($valor) {
     return number_format($valor, 2, ",", ".");
 }
