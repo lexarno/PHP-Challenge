@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\PaymentRequest;
 use App\Payment;
@@ -37,11 +36,11 @@ class PaymentController extends Controller
             if($this->savePayment($data)){
                 return response()->json(['ret' => 1, 'msg' => 'Pagamento realizado com sucesso!', 'url' => route('user.success')],200);
             }else{
-                return response()->json(['ret' => 0, 'msg' => 'Ops, ocorreu um erro no pagamento. Tente novamente.', 'url' => route('user.error')],500);
+                return response()->json(['ret' => 0, 'msg' => 'Ops, ocorreu um erro no pagamento. Verifique os dados e tente novamente.', 'url' => route('user.error')],404);
             }
         }else{
             $this->savePayment($data);
-            return response()->json(['ret' => 0, 'msg' => 'Ops, cartão reprovado. Tente novamente'],500);
+            return response()->json(['ret' => 0, 'msg' => 'Ops, cartão reprovado. Verifique os dados e tente novamente.'],404);
         }
     }
 

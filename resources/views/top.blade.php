@@ -3,7 +3,10 @@
   @if (Route::has('login'))
     @auth
         <nav class="my-2 my-md-0 mr-md-3">
-            <a class="p-2 text-dark" href="{{ url('/home') }}">Home</a>
+            <a class="p-2 text-dark" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"">{{ Auth::user()->name }} (Sair)</a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                {{ csrf_field() }}
+            </form>
         </nav>
     @else
         <nav class="my-2 my-md-0 mr-md-3">
