@@ -34,8 +34,6 @@ class PaymentController extends Controller
         if ($this->checkCard($data)){
             $user = User::find($data['user_id']);
             $user->update(['plan_id' => $data['plan_id']]);
-            Session::forget('user_id');
-            Auth::loginUsingId($user->id);
             if($this->savePayment($data)){
                 return response()->json(['ret' => 1, 'msg' => 'Pagamento realizado com sucesso!', 'url' => route('user.success')],200);
             }else{

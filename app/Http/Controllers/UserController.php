@@ -64,6 +64,9 @@ class UserController extends Controller
 
     public function success()
     {
+        $user = Session::has('user_id') ? Session::get('user_id') : null;
+        Auth::loginUsingId($user);
+        Session::forget('user_id');
         return view('user.success');
     }
 
