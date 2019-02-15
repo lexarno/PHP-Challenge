@@ -71,28 +71,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        try{
-            $create = User::create([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'cpf' => $data['cpf'],
-                'password' => Hash::make($data['password']),
-                'cep' => $data['cep'],
-                'address' => $data['address'],
-                'complement' => $data['complement'],
-                'number' => $data['number'],
-                'district' => $data['district'],
-                'uf' => $data['uf'],
-                'city' => $data['city'],
-            ]);
-
-            if($create){
-                return response()->json(['ret' => 0, 'msg' => 'Cadastro realizado com sucesso!', 'url' => route('plans')],200);
-            } else {
-                return response()->json(['ret' => 0, 'msg' => 'Ops, ocorreu um erro no cadastro. Por favor tente mais tarde.'],500);
-            }
-        }catch (\Exception $e){
-            return response()->json(['ret' => 0, 'msg' => 'Ops, ocorreu um erro no cadastro. Por favor tente mais tarde.'],500);
-        }
+        
     }
 }

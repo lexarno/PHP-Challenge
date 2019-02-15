@@ -51,6 +51,6 @@ class User extends Authenticatable
 
     public function user_phone()
     {
-        return $this->belongsToMany(Phone::class, 'user_phone', 'phone_id', 'user_id')->withTimestamps();
+        return $this->belongsToMany(Phone::class, 'user_phone', 'user_id', 'phone_id')->withTimestamps();
     }
 }

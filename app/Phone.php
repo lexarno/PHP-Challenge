@@ -12,6 +12,6 @@ class Phone extends Model
     
     public function user_phone()
     {
-        return $this->belongsToMany(User::class, 'user_phone', 'user_id', 'phone_id')->withTimestamps();
+        return $this->belongsToMany(User::class, 'user_phone', 'phone_id', 'user_id')->withTimestamps();
     }
 }

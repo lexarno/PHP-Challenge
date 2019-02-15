@@ -15,10 +15,12 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('card_name');
-            $table->string('card_number');
-            $table->integer('card_cv');
-            $table->string('card_expiring');
+            $table->integer('user_id')->unsigned()->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->string('card_name')->nullable();
+            $table->string('card_number')->nullable();
+            $table->integer('card_cvv')->nullable();
+            $table->string('card_expiration')->nullable();
             $table->timestamps();
         });
     }

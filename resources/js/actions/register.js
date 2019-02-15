@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    var phones = [];
     if ($("#frm-register").length) {
 
         $('#cpf').inputmask({ mask: '999.999.999-99' });
@@ -39,14 +38,18 @@ $(document).ready(function () {
                 },
                 errorPlacement: function (error, element) { },
                 submitHandler: function (form) {
+                    $("#btnSaveRegister").attr('disabled',true);
+                    Swal.showLoading()
                     var params = $("#frm-register").serialize();
                     var url = $("#frm-register").attr('action');
-                    
 
                     if ($('#password').val() == $('#password-confirm').val()){
+                        var phones = [];
+                        var count = 0;
                         $('.ph').each(function (i) {
                             var phone = $(this).attr('id');
-                            phones.push($('#' + phone).val());
+                            phones[count] = [$('#' + phone).val()];
+                            count++;
                         });
 
                         $.ajax({
@@ -56,26 +59,21 @@ $(document).ready(function () {
                             dataType: 'json',
                             contentType: 'application/x-www-form-urlencoded',
                             success: function (response) {
-                                console.log(response)
                                 if (response.ret == 1) {
-                                    swal({
-                                        title: "Atenção!",
-                                        text: response.msg,
-                                        type: "success",
-                                        confirmButtonColor: '#3085d6',
-                                        cancelButtonColor: '#d33',
-                                        confirmButtonText: "Ok",
-                                    }, function () {
-                                        //console.log(response.url);
-                                       // window.location = response.url;
-                                    });
+                                    $("#btnSaveRegister").attr('disabled',false);
+                                    Swal.enableLoading();
+                                    window.location = response.url;
                                 } else {
-                                    swal("Atenção", response.msg, "error");
+                                    $("#btnSaveRegister").attr('disabled',false);
+                                    Swal.enableLoading()
+                                    Swal.fire("Atenção", response.msg, "error");
                                 }
                             }
                         });
                     }else{
-                        swal("Atenção", "A senha não confere com a confirmação.", "error");
+                        $("#btnSaveRegister").attr('disabled',false);
+                        Swal.enableLoading()
+                        Swal.fire("Atenção", "A senha não confere com a confirmação.", "error");
                     }
                     return false;
                 }

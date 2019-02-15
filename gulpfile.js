@@ -15,7 +15,7 @@ gulp.task('css', function () {
 });
 
 gulp.task('js', function() {
-    return gulp.src(['resources/plugins/jquery-3.3.1.min.js', 'resources/plugins/bootstrap-4.3.1-dist/js/bootstrap.min.js', 'resources/plugins/jquery.validate.min.js', 'resources/plugins/jquery.inputmask.bundle.min.js', 'resources/plugins/sweetalert2.min.js'])
+    return gulp.src(['resources/plugins/jquery-3.3.1.min.js', 'resources/plugins/bootstrap-4.3.1-dist/js/bootstrap.min.js', 'resources/plugins/sweetalert2.min.js', 'resources/plugins/jquery.validate.min.js', 'resources/plugins/jquery.inputmask.bundle.min.js'])
         .pipe(uglify())
         .pipe(concat('bundle.min.js'))
         .pipe(gulp.dest('public/js'));

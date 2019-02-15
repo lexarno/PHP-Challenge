@@ -14,10 +14,13 @@
 Route::get('/', function () {
     return view('index');
 });
-Route::get('/escolher-plano', function () {
-    return view('plan.index');
-})->name('plans');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => 'cadastro', 'as' => 'user.'], function () {
+    Route::get('/', ['as' => 'index', 'uses' => 'UserController@index']);
+    Route::get('/escolher-plano', ['as' => 'plans', 'uses' => 'UserController@plans']);
+    Route::post('/store', ['as' => 'store', 'uses' => 'UserController@store']);
+});
